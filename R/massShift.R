@@ -1,31 +1,43 @@
 # Function to calculate additional mass by modifications on peptides
 ## To be called by functions 'proteinMass' and 'peptideMZ'
 
-massShift <- function(sequence, label = "none"){
+massShift <- function(sequence, label = "none", aa, shift){
 
   # Check inputs
   label <- tolower(label) # Renders case-insensitive input string.
-  if(!(label %in% c("none", "silac_13c", "silac_15n13c", "15n"))){
-    stop("Given label type unknown. Please use one of 'none', '15N', 'Silac_15N13C', or 'Silac_13C' (case-insensitive).")
+  if(!(label %in% c("none", "silac_13c", "silac_13c15n", "15n"))){
+    stop("Given label type unknown. Please use one of 'none', '15N', 'Silac_13C15N', or 'Silac_13C' (case-insensitive).")
+  }
+  if(!is.null(aa) & length(shift) != 1 & length(shift) != length(aa)){
+    stop("If 'aa' is given, 'shift' must be a vector of length 1 or of the same length as 'aa'.")
   }
 
   # Read mass table & dependencies
   massTable <- read.csv("g:/programming/R_snippets/peptideMZ/AminoAcids_masses.csv", stringsAsFactors = F)
   require(stringi)
 
-  shiftTotal <- 0
+  # Predefined labels
+  if (label == "silac_13c"){
+    aa <- "KR"
+    shift <- 6.020129
+  } else if(label == "silac_13c15n"){
+    aa <- c("K", "R")
+    shift <- c(8.014199, 10.008269)
+  }
 
-  # Add mass shifts for SILAC labelling
-  nK <- stri_count(sequence, fixed = "K")
-  nR <- stri_count(sequence, fixed = "R")
-  if(label == "silac_13c"){
-    shiftK <- 6.020129
-    shiftR <- 6.020129
-    shiftTotal <- nK * shiftK + nR * shiftR
-  }else if(label == "silac_15n13c"){
-    shiftK <- 8.014199
-    shiftR <- 10.008269
-    shiftTotal <- nK * shiftK + nR * shiftR
+  # Add mass shifts
+  shiftTotal <- 0
+  aa <- as.list(aa)
+  aa <- lapply(aa, function(x) unlist(strsplit(x, "")))
+  for (i in 1:length(aa)){
+    for (j in 1:length(aa[[i]])){
+      n <- stri_count(sequence, fixed = aa[[i]][j])
+      if (length(shift) < length(aa)) {
+        shiftTotal <- shiftTotal + n * shift
+      } else {
+        shiftTotal <- shiftTotal + n * shift[i]
+      }
+    }
   }
 
   # Add mass shifts for 15N labelling
@@ -40,6 +52,4 @@ massShift <- function(sequence, label = "none"){
 }
 
 ## ToDo
-# - Alternative input: modified aa ("aa") and mass shift ("shift")
-#   - bei aa müssen mehrere angeben werden können, und auch N-terminal und C-terminal
-#   - dann können auch die mass shifts für SILAC einfach über diese Funktion berechnet werden
+#   - bei aa auch N-terminal und C-terminal einbauen!
