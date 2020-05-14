@@ -1,6 +1,11 @@
 ## Function to calculate m/z of peptides
 peptideMZ <- function(sequence, charge=2, label="none"){
 
+  # Check for correct input
+  if(!is.numeric(charge) | length(charge) != 1){
+    stop("Charge must be given as a number (typically between 1-4).")
+  }
+
   # Calculate mass of uncharged peptide
   mass <- proteinMass(sequence, label, monoisotopic = TRUE)
 
@@ -16,3 +21,6 @@ peptideMZ <- function(sequence, charge=2, label="none"){
 
   return(mass)
 }
+
+## ToDo:
+# - sobald die massShift-Funktion auch freie Modifikationen frisst, kann das Label bei C über massShift eingefügt werden.
