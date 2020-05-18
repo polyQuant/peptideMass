@@ -1,5 +1,5 @@
-## Function to calculate mass of proteins/peptides
-proteinMass <- function(sequence, monoisotopic = FALSE, label="none"){
+proteinMass <-
+function(sequence, monoisotopic = FALSE, label="none"){
 
   require(stringi)
   massTable <- read.csv("g:/programming/R_snippets/peptideMZ/AminoAcids_masses.csv", stringsAsFactors = F)
@@ -34,9 +34,3 @@ proteinMass <- function(sequence, monoisotopic = FALSE, label="none"){
 
   return(mass)
 }
-
-#ToDo:
-# - korrekte Berechnung von 15N testen
-# - evtl. noch Korrektur für average/monoisotopic 15N einführen
-#  - evtl. noch eine Funktion aussenrum: mz aller Peptide eines PRoteins berechnen, mit Cleavage
-#  - transfer into shiny app

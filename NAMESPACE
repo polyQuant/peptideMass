@@ -1,1 +1,4 @@
-exportPattern("^[[:alpha:]]+")
+#exportPattern("^[[:alpha:]]+")
+export(massShift, peptideMZ, proteinMass)
+
+import(graphics, grDevices, stats, utils, stringi)

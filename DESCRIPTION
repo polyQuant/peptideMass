@@ -1,12 +1,11 @@
 Package: peptideMass
 Type: Package
-Title: Calculate masses of labeled proteins and peptides
-Version: 0.1.0
-Author: Florian Christoph Sigloch
+Title: Mass and m/z of modified proteins and peptides.
+Version: 0.8
+Date: 2020-05-18
+Author: Florian Christoph Sigloch, PolyQuant GmbH
 Maintainer: Florian Christoph Sigloch <sigloch@polyquant.com>
-Description: The package includes a single function to calculate masses of proteins and peptides with stable isotope labels. 
-Stable isotope labels are commonly used in proteomics to be able to discriminate a standard from an endogeneous peptide.
-The package is a supposed to be a remake of the mass calculation in the ExPASy tool 'PeptideMass', but including more options for common labels like SILAC and 15N.
-License: 
-Encoding: UTF-8
+Description: Calculate the exact masses or the mass-over-charge ratio (m/z) of modified or heavy isotope labelled proteins and peptides.
+License: GPL-3
+Depends: graphics, grDevices, stats, utils, R (>= 3.6.2), stringi
 LazyData: true

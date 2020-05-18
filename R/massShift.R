@@ -1,7 +1,5 @@
-# Function to calculate additional mass by modifications on peptides
-## To be called by functions 'proteinMass' and 'peptideMZ'
-
-massShift <- function(sequence, label = "none", aa, shift){
+massShift <-
+function(sequence, label = "none", aa, shift){
 
   # Check inputs
   label <- tolower(label) # Renders case-insensitive input string.
@@ -44,12 +42,9 @@ massShift <- function(sequence, label = "none", aa, shift){
   if(label == "15n"){
     for (i in 1:nrow(massTable)){
       nN <- stri_count(sequence, fixed = massTable$oneLetter[i]) * massTable$AnzahlN[i]
-      shiftTotal <- shiftTotal + nN * 0.997035 # 0.997035 ist der mass shift zwischen 14N zu 15N. Da der natÃ¼rliche Anteil an 15N nur 0.4% ist, kann der gleiche Unterschied fÃ¼r die Monoisotopic Mass und  fÃ¼r die Average Mass benutzt werden.
+      shiftTotal <- shiftTotal + nN * 0.997035 # 0.997035 ist der mass shift zwischen 14N zu 15N. Da der natürliche Anteil an 15N nur 0.4% ist, kann der gleiche Unterschied für die Monoisotopic Mass und  für die Average Mass benutzt werden.
     }
   }
 
   return(shiftTotal)
 }
-
-## ToDo
-#   - bei aa auch N-terminal und C-terminal einbauen!
