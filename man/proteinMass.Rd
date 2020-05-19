@@ -29,7 +29,7 @@
     }
 }
 \references{
-  The unmodified protein mass is calculated using amino acid weights as defined by \hyperref{Expasy}{http://education.expasy.org/student_projects/isotopident/htdocs/aa-list.html}.
+  The unmodified protein mass is calculated using amino acid weights as defined by \href{http://education.expasy.org/student_projects/isotopident/htdocs/aa-list.html}{Expasy}.
 }
 \seealso{
   For the exact definition of predefined heavy isotope labels and the use of custom modifications, see \code{\link{massShift}}.

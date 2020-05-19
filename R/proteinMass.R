@@ -1,9 +1,6 @@
 proteinMass <-
 function(sequence, monoisotopic = FALSE, label="none"){
 
-  require(stringi)
-  massTable <- read.csv("g:/programming/R_snippets/peptideMZ/AminoAcids_masses.csv", stringsAsFactors = F)
-
   # Check for correct input
   if(!all(strsplit(sequence, "")[[1]] %in% massTable$oneLetter)){
     stop("The input sequence contains unknown amino acids. Did you paste the sequence without Fasta header?")
