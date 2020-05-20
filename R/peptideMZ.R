@@ -1,5 +1,5 @@
 peptideMZ <-
-function(sequence, charge=2, label="none"){
+function(sequence, label="none", aa, shift, charge=2, carbamidomethyl=TRUE){
 
   # Check for correct input
   if(!is.numeric(charge) | length(charge) != 1){
@@ -9,9 +9,14 @@ function(sequence, charge=2, label="none"){
   # Calculate mass of uncharged peptide
   mass <- proteinMass(sequence, label, monoisotopic = TRUE)
 
-  # Add alkylations at cysteins
-  nC <- stri_count(sequence, fixed = "C")
-  mass <- mass + nC * 57.021464 # For Carbamidomethylation with Iodoacetamide
+  # Add Carbamidomethylation with Iodoacetamide at cysteins
+  if (carbamidomethyl = TRUE){
+    nC <- stri_count(sequence, fixed = "C")
+    mass <- mass + nC * 57.021464
+  }
+
+  # Add manual modifications
+  massShift(sequence = sequence, aa = aa, shift = shift)
 
   # Modify for charged peptides.
   if (charge >= 0){

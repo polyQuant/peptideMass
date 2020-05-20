@@ -1,5 +1,5 @@
 proteinMass <-
-function(sequence, monoisotopic = FALSE, label="none"){
+function(sequence, label="none", monoisotopic = FALSE){
 
   # Check for correct input
   if(!all(strsplit(sequence, "")[[1]] %in% massTable$oneLetter)){
