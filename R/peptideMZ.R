@@ -10,7 +10,7 @@ function(sequence, label="none", aa, shift, charge=2, carbamidomethyl=TRUE){
   mass <- proteinMass(sequence, label, monoisotopic = TRUE)
 
   # Add Carbamidomethylation with Iodoacetamide at cysteins
-  if (carbamidomethyl = TRUE){
+  if (carbamidomethyl == TRUE){
     nC <- stri_count(sequence, fixed = "C")
     mass <- mass + nC * 57.021464
   }
