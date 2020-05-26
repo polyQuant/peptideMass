@@ -2,6 +2,7 @@ proteinMass <-
 function(sequence, label="none", monoisotopic = FALSE){
 
   # Check for correct input
+  sequence <- toupper(sequence)
   if(!all(strsplit(sequence, "")[[1]] %in% massTable$oneLetter)){
     stop("The input sequence contains unknown amino acids. Did you paste the sequence without Fasta header?")
   }

@@ -1,7 +1,7 @@
 Package: peptideMass
 Type: Package
 Title: Mass and m/z of modified proteins and peptides.
-Version: 0.83
+Version: 0.84
 Date: 2020-05-18
 Author: Florian Christoph Sigloch, PolyQuant GmbH
 Maintainer: Florian Christoph Sigloch <sigloch@polyquant.com>
